@@ -40,6 +40,28 @@ app.post('/articles', function(req, res) {
     res.redirect('/articles');
 });
 
+app.get('/articles/edit/:id', function(req, res) {
+    res.render('articles/edit', {article: articles[req.params.id], idx: req.params.id });
+});
+
+app.put('articles/:id/edit', function(req,res){
+    var articleId = parseInt(req.params.id);
+    articles[articleId].title = req.body.title;
+    articles[articleId].body = req.body.body;
+    res.send({message: 'success'});
+});
+
+app.delete('/articles/:id', function(req, res) {
+  var articleToDelete = req.params.name;
+  // var articles = fs.readFileSync('./articles');
+  articles = JSON.parse(articles);
+  articles = articles.filter(function(item) {
+    return (item.name !== articleToDelete);
+  });
+  // fs.writeFileSync('./articles', JSON.stringify(articles));
+  res.send({message: 'success'});
+});
+
 app.get('/about', function(req, res) {
     res.render('about');
 });
