@@ -17,7 +17,7 @@
   $('[type=button]').on('click', function(e) {
     e.preventDefault();
     var updateUrl = $(this).parent().attr('action');
-    var animalData = $(this).parent().serialize();
+    var articleData = $(this).parent().serialize();
     $.ajax({
       method: 'PUT',
       url: updateUrl,
